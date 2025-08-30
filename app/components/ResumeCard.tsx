@@ -1,21 +1,34 @@
-import { Link } from "react-router"
-import "./ResumeCard.css";  
+import { Link } from "react-router";
 import ScoreCircle from "../components/ScoreCircle";
-const ResumeCard = ({resume: { id, companyName, jobTitle, feedback, imagePath }} : {resume: Resume}) => {
-  return (
-    <Link to={`/resume/${id}`} className="resume-card animate-in fade-in duration-1000">
-     <div className="resume-card-header">
-        <div className="resume-info">
-            {companyName && <h2 className="company-name">{companyName}</h2>}
-            {jobTitle && <h3 className="job-title">{jobTitle}</h3>}
-             {!companyName && !jobTitle && <h2 className="company-name">Resume</h2>}
-        </div>
-        <div className="score-wrapper">
-            <ScoreCircle score={feedback.overallScore} />
-        </div>
-     </div>
-    </Link>
-  )
-}
 
-export default ResumeCard
+const ResumeCard = ({
+  resume: { id, companyName, jobTitle, feedback, imagePath },
+}: {
+  resume: Resume;
+}) => {
+  return (
+    <Link
+      to={`/resume/${id}`}
+      className="resume-card animate-in fade-in duration-1000"
+    >
+      <div className="resume-card-header">
+        <div className="flex flex-col gap-2">
+          {companyName && (
+            <h2 className="!text-black font-bold break-words font-quattrocento">{companyName}</h2>
+          )}
+          {jobTitle && (
+            <h3 className="text-lg break-words text-gray-500 font-quattrocento">{jobTitle}</h3>
+          )}
+          {!companyName && !jobTitle && (
+            <h2 className="!text-black font-bold font-quattrocento">Resume</h2>
+          )}
+        </div>
+        <div className="flex-shrink-0">
+          <ScoreCircle score={feedback.overallScore} />
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default ResumeCard;
